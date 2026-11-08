@@ -183,17 +183,86 @@
       .about-photo-wrap { width: 205px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+    /* Navigation and motion refresh. */
+    .brand { color: #f4f7f4; text-decoration: none; font-size: 16px; font-weight: 750; letter-spacing: -.04em; white-space: nowrap; }
+    .mobile-menu { display: none; }
+    .nav-links { margin-left: auto; }
+    .nav { gap: 24px; }
+    .eyebrow::before { flex-shrink: 0; animation: audience-pulse 2.8s ease-in-out infinite; }
+    @keyframes audience-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 3px rgba(75,229,135,.18); }
+      50% { opacity: .55; box-shadow: 0 0 0 8px rgba(75,229,135,0); }
+    }
+    @property --border-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+    .hero .button {
+      position: relative; border: 2px solid transparent; border-radius: 12px;
+      background: linear-gradient(#16c45e, #16c45e) padding-box,
+        conic-gradient(from var(--border-angle), #22864a 0deg, #22864a 250deg, #baffd2 300deg, #fff 325deg, #22864a 360deg) border-box;
+      animation: border-travel 3.5s linear infinite;
+      box-shadow: 0 8px 35px rgba(22,196,94,.25), 0 0 0 5px rgba(75,229,135,.06);
+    }
+    .hero .button:hover { background: linear-gradient(#4be587, #4be587) padding-box, conic-gradient(from var(--border-angle), #22864a, white, #22864a) border-box; }
+    @keyframes border-travel { to { --border-angle: 360deg; } }
+    .hero-highlight::before, .fit-badge::before { content: none; }
+    .hero-highlight { background: transparent; border: 0; border-radius: 0; padding: 4px 13px; font-weight: 500; color: #b8c7be; }
+    .hero-highlight + .hero-highlight { border-left: 1px solid rgba(255,255,255,.2); }
+    .contact-email { margin-top: 22px; font-size: 13px; line-height: 1.8; color: #b8c4bc; }
+    .contact-email a, .footer-email { color: #d8f6e3; text-underline-offset: 4px; overflow-wrap: anywhere; }
+    .footer-inner { align-items: center; flex-wrap: wrap; }
+    @media (max-width: 860px) {
+      .nav-shell { padding-top: 10px; margin-bottom: -78px; }
+      .nav { position: relative; min-height: 62px; padding: 9px 13px; flex-wrap: nowrap; gap: 12px; border-radius: 14px; }
+      .nav > .nav-links { display: none; }
+      .nav-cta { margin-left: auto; min-height: 42px; padding: 0 12px; font-size: 11px; }
+      .mobile-menu { display: block; color: #e5eee8; }
+      .mobile-menu summary { display: grid; place-items: center; min-height: 44px; min-width: 44px; cursor: pointer; list-style: none; font-size: 11px; border-radius: 8px; }
+      .mobile-menu summary::-webkit-details-marker { display: none; }
+      .mobile-menu summary:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 2px; }
+      .mobile-menu[open] summary { background: #26392d; color: var(--green-bright); }
+      .mobile-menu nav { position: absolute; left: 0; right: 0; top: calc(100% + 8px); display: grid; gap: 4px; padding: 10px; border: 1px solid #34443a; border-radius: 14px; background: #131d17; box-shadow: 0 16px 40px #0005; }
+      .mobile-menu nav a { padding: 14px; text-decoration: none; font-size: 14px; border-radius: 6px; }
+      .mobile-menu nav a:hover { background: #26392d; }
+      .hero-content { padding-top: 126px; }
+    }
+    @media (max-width: 620px) {
+      .brand { font-size: 14px; }
+      .nav { gap: 7px; padding-inline: 11px; }
+      .nav-cta { font-size: 10px; padding-inline: 10px; }
+      .hero-content { width: calc(100% - 36px); padding-bottom: 48px; }
+      .eyebrow { font-size: 9px; letter-spacing: .12em; }
+      h1 { font-size: clamp(38px, 10.7vw, 62px); line-height: 1.06; letter-spacing: -.055em; }
+      .hero-copy { font-size: 15px; line-height: 1.75; }
+      .hero .button { width: min(100%, 310px); min-height: 58px; }
+      .hero-meta { max-width: 270px; margin-inline: auto; line-height: 1.65; }
+      .hero-highlights { display: grid; gap: 8px; margin-top: 25px; }
+      .hero-highlight { justify-content: center; font-size: 11px; }
+      .hero-highlight + .hero-highlight { border-left: 0; }
+      .about-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+      .footer-inner { align-items: flex-start; gap: 12px; line-height: 1.7; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; }
+    }
   </style>
 </head>
 <body>
   <header class="nav-shell">
     <div class="wrap nav">
+      <a class="brand" href="#top">Ahmad Nasir<span aria-hidden="true" style="color:var(--green-bright)">.</span></a>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#solution">What I Do</a>
-        <a href="#who-its-for">What It's For</a>
+        <a href="#who-its-for">Who It's For</a>
         <a href="#guarantee">The Guarantee</a>
       </nav>
-      <a class="nav-cta" href="https://calendly.com/ahmadnasirgrowth/discovery-call-with-ahmad" target="_blank" rel="noopener noreferrer">Book Your Call <span aria-hidden="true">↗</span></a>
+      <a class="nav-cta" href="https://calendly.com/ahmadnasirgrowth/discovery-call-with-ahmad" target="_blank" rel="noopener noreferrer">Book Your Call</a>
+      <details class="mobile-menu">
+        <summary aria-label="Toggle navigation menu">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="#solution">What I Do</a>
+          <a href="#who-its-for">Who It's For</a>
+          <a href="#guarantee">The Guarantee</a>
+        </nav>
+      </details>
     </div>
   </header>
 
@@ -276,12 +345,25 @@
 
     <section class="section call" id="call" aria-labelledby="call-title">
       <div class="wrap call-grid">
-        <div class="call-intro"><span class="section-label">Your next step</span><h2 id="call-title">Let's see what could work for your practice.</h2><p>On a 15-minute call, we'll understand your current situation and discuss a potential plan that fits your needs.</p><a class="button" href="https://calendly.com/ahmadnasirgrowth/discovery-call-with-ahmad" target="_blank" rel="noopener noreferrer">Book a 15-minute call <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><div class="call-length">15 minutes · No pressure</div></div>
+        <div class="call-intro"><span class="section-label">Your next step</span><h2 id="call-title">Let's see what could work for your practice.</h2><p>On a 15-minute call, we'll understand your current situation and discuss a potential plan that fits your needs.</p><a class="button" href="https://calendly.com/ahmadnasirgrowth/discovery-call-with-ahmad" target="_blank" rel="noopener noreferrer">Book a 15-minute call <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><div class="call-length">15 minutes · No pressure</div><p class="contact-email">Prefer email? <a href="mailto:admin@ahmadnasir.com">admin@ahmadnasir.com</a></p></div>
         <div class="agenda"><article class="agenda-item"><span class="agenda-index">01</span><div><h3>Your practice</h3><p>Your service area, current lead sources, and growth goals.</p></div></article><article class="agenda-item"><span class="agenda-index">02</span><div><h3>Current challenges</h3><p>What's getting in the way of generating inquiries and booking new-patient appointments?</p></div></article><article class="agenda-item"><span class="agenda-index">03</span><div><h3>Growth opportunities</h3><p>Ways to improve lead generation, response times, follow-up, and appointment bookings.</p></div></article><article class="agenda-item"><span class="agenda-index">04</span><div><h3>Next steps</h3><p>See whether the service is a good fit and discuss how we could move forward.</p></div></article></div>
       </div>
     </section>
   </main>
-  <footer><div class="wrap footer-inner"><span><strong>Ahmad Nasir</strong> · Patient acquisition for chiropractic practices</span><span>© 2026 Ahmad Nasir</span></div></footer>
+  <footer><div class="wrap footer-inner"><span><strong>Ahmad Nasir</strong> · Patient acquisition for chiropractic practices</span><a class="footer-email" href="mailto:admin@ahmadnasir.com">admin@ahmadnasir.com</a><span>© 2026 Ahmad Nasir</span></div></footer>
+  <script>
+    const mobileMenu = document.querySelector('.mobile-menu');
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { mobileMenu.open = false; }));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && mobileMenu.open) {
+        mobileMenu.open = false;
+        mobileMenu.querySelector('summary').focus();
+      }
+    });
+    document.addEventListener('click', event => {
+      if (!mobileMenu.contains(event.target)) mobileMenu.open = false;
+    });
+  </script>
 </body>
 </html>
 
